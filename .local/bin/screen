@@ -1,0 +1,53 @@
+#!/bin/zsh
+
+no_external() {
+	xrandr --output eDP-1 --primary --mode 1366x768 --rotate normal
+	xrandr --output VGA-1 --off
+	xrandr --output HDMI-1 --off
+	xrandr --output DP-1-1 --off
+}
+mirror(){
+	xrandr --output "$display" --auto --same-as eDP-1 --mode "$resolution"
+	xrandr --output eDP-1 --mode 1366x768
+}
+
+extend_internal_primary() {
+	xrandr --output eDP-1 --primary --mode 1366x768 --rotate normal
+	xrandr --output "$display" --mode "$resolution" --pos 1366x0 --rotate normal
+}
+extend_external_primary() {
+	xrandr --output eDP-1 --mode 1366x768 --rotate normal
+	xrandr --output "$display" --primary --mode "$resolution" --pos 1366x0 --rotate normal
+}
+
+screen_and_resolution() {
+	read dplay
+	echo "$dplay"
+	case "$dplay" in
+		"0") display="eDP-1";;
+		"1") display="VGA-1";;
+		"2") display="HDMI-1";;
+		"3") display="DP-1-1";;
+	esac
+	echo "Enter resolution for selected screen (Default 1920x1200): "
+	read res
+	[ "$res" = "" ] && resolution="1920x1200" || resolution="$res"
+	echo "$res"
+}
+
+echo -e "Select option:\n\n[0]No external screen\n[1]Mirror\n[2]Extend\n"
+read selection
+
+case "$selection" in
+	"0") no_external ;;
+	"1") echo -e "Select output:\n\n[0]Internal screen\n[1]VGA\n[2]HDMI\n[3]DP(Docking Station)"
+		screen_and_resolution
+		mirror;;
+	"2") echo -e "Select primary output:\n\n[0]Internal screen\n[1]VGA\n[2]HDMI\n[3]DP(Docking Station)"
+		screen_and_resolution
+		[ "display" = "eDP-1" ] && 
+			extend_internal_primary || 
+			extend_external_primary;;
+	*) exit 1;
+esac
+

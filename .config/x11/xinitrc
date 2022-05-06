@@ -1,0 +1,12 @@
+#!/bin/sh
+
+[[ -f ~/.config/x11/Xresources ]] && xrdb -merge -I$HOME ~/.config/x11/Xresources
+
+mapkeys &
+statusbar &
+mpd &
+dunst &
+unclutter &
+sxhkd &
+exec dwm
+

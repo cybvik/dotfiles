@@ -1,0 +1,24 @@
+#!/bin/sh
+
+clock_status() {
+	printf "[$(date +%H:%M:%S)]"
+}
+
+# Display volume percentage and audio device state (muted or not)
+volume_status() {
+	[ "$(pamixer --get-volume-human)" = "muted" ] && tag="MUTE:" || tag="VOL: "
+	vol="$(pamixer --get-volume)"
+	printf "[$tag$vol%%]"
+}
+
+
+# Display current battery capacity and state ('Charging', 'Discharging' or 'Not charging')
+battery_status() {
+	bat_state="$(cat /sys/class/power_supply/BAT0/status | sed 's/Charging/C/g;s/Discharging/D/g;s/Not charging/N/g')"
+	printf "[BAT:$(cat /sys/class/power_supply/BAT0/capacity)|$bat_state]"
+}
+
+while true; do
+	xsetroot -name "$(clock_status)$(volume_status)$(battery_status)"
+	sleep 1
+done

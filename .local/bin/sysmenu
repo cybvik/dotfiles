@@ -1,0 +1,10 @@
+#!/bin/sh
+
+case "$(printf "lock\nleave dwm\nrestart dwm\nreboot\nshutdown" | dmenu -i -p 'Action: ')" in
+	'lock') slock ;;
+	'leave dwm') kill -TERM "$(pgrep -u "$USER" "\bdwm$")" ;;
+	'restart dwm') kill -HUP "$(pgrep -u "$USER" "\bdwm$")" ;;
+	'reboot') loginctl reboot -i ;;
+	'shutdown') loginctl poweroff -i ;;
+	*) exit 1 ;;
+esac

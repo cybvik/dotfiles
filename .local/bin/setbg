@@ -1,0 +1,11 @@
+#!/bin/sh
+
+bg_link="$HOME/.bg"
+
+if [ "$#" -eq 0 ]; then
+	xwallpaper --zoom "$bg_link"
+else
+	bg_location="$(readlink -f "$1")"
+	ln -sf "$bg_location" "$bg_link"
+	xwallpaper --zoom "$bg_link"
+fi

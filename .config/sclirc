@@ -1,0 +1,4 @@
+enable-notifications = true
+notification-command = notify-send -i '%a' scli 'Neue Nachricht von %s'
+save-history = true
+partition-contacts = true

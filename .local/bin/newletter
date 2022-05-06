@@ -1,0 +1,15 @@
+#!/bin/sh
+
+while getopts ":h" o; do case "${o}" in
+	h) printf "USAGE: newletter [recipient] [re]"; exit 0;;
+esac done
+
+src_dir="$HOME/docs/latex-vorlagen/latex-briefvorlage"
+recipient="$1"
+regard="$2"
+
+mkdir "$HOME/doc/briefe/ausgang/$2"
+cp "$src_dir/Absender_$recipient.lco" "$HOME/doc/briefe/ausgang/$2/Absender.lco" ||
+	{ printf "Recipient does not exist!"; rm -rf "$HOME/doc/briefe/ausgang/$2"; exit 1 }
+cp "$src_dir/Brief.tex" "$HOME/doc/briefe/ausgang/$2/."
+cp "$src_dir/Briefvorlage.lco" "$HOME/doc/briefe/ausgang/$2/."
