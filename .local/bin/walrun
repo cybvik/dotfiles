@@ -1,0 +1,15 @@
+#!/bin/sh
+
+bg=$(readlink $HOME/.bg)
+src_dir="$HOME"/.local/src
+
+make_install() {
+	cd "$src_dir"/"$1"
+	sudo make install
+}
+
+wal -i "$bg"
+
+make_install dwm
+make_install st
+make_install dmenu

@@ -2,11 +2,13 @@
 
 [[ -f ~/.config/x11/Xresources ]] && xrdb -merge -I$HOME ~/.config/x11/Xresources
 
+setbg &
 mapkeys &
 statusbar &
 mpd &
 dunst &
 unclutter &
 sxhkd &
+picom &
 exec dwm
 
