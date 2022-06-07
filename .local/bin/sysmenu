@@ -1,10 +1,16 @@
 #!/bin/sh
 
-case "$(printf "lock\nleave dwm\nrestart dwm\nreboot\nshutdown" | dmenu -i -p 'Action: ')" in
+case "$(readlink -f /sbin/init)" in
+	*systemd*) ctl='systemctl' ;;
+	*) ctl='loginctl' ;;
+esac
+
+case "$(printf "lock\nleave dwm\nrestart dwm\nreboot\nshutdown\nmonitor setup" | dmenu -i -p 'Action: ')" in
 	'lock') slock ;;
 	'leave dwm') kill -TERM "$(pgrep -u "$USER" "\bdwm$")" ;;
 	'restart dwm') kill -HUP "$(pgrep -u "$USER" "\bdwm$")" ;;
-	'reboot') loginctl reboot -i ;;
-	'shutdown') loginctl poweroff -i ;;
+	'reboot') $ctl reboot -i ;;
+	'shutdown') $ctl poweroff -i ;;
+	'monitor setup') displayselect ;;
 	*) exit 1 ;;
 esac
