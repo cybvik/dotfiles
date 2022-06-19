@@ -15,6 +15,7 @@ call plug#end()
 set clipboard+=unnamedplus
 set number relativenumber
 set cc=80,120
+colorscheme cyberpunk
 
 
 " Nerd tree
