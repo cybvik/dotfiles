@@ -41,7 +41,7 @@ battery_status() {
 		bat_symbol=""
 	elif [ "$bat_cap" -gt "10" ]; then
 		bat_symbol=""
-	elif [ "$bat_cap" -lt "10" ]; then
+	elif [ "$bat_cap" -gt "0" ]; then
 		bat_symbol=""
 	fi
 
@@ -64,6 +64,6 @@ network_status() {
 }
 
 while true; do
-	xsetroot -name "$(clock_status)$(battery_status)$(network_status);$(volume_status)$(mpc_status)"
+	xsetroot -name "$(clock_status)$(battery_status)$(network_status)$(volume_status);$(mpc_status)"
 	sleep 1
 done
