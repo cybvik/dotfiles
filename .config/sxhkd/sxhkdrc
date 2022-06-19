@@ -16,7 +16,7 @@ super + v
 super + e
 	$TERMINAL neomutt
 super + y
-	$TERMINAL ytfzf
+	$TERMINAL ytfzf -t
 super + a
 	$TERMINAL abook
 super + c
