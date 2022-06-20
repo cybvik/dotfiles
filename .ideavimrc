@@ -1,0 +1,77 @@
+Plug 'preservim/nerdtree'
+
+""" General
+set ideajoin
+set idearefactormode=keep
+
+" Clipboard
+set clipboard+=unnamed
+set clipboard+=ideaput
+set number relativenumber
+
+" Leader
+let mapleader=","
+
+" Escape
+map <C-c> <Esc>
+
+" Vim stuff
+sethandler <C-v> i:ide
+sethandler <C-r> i:ide
+sethandler <C-x> i:ide
+
+""" IntelliJ functions
+" Go To
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap gc :action GotoClass<CR>
+nnoremap gu :action FindUsages<CR>
+nnoremap gl :action JumpToLastChange<CR>
+nnoremap ge :action GotoNextError<CR>
+
+" Formatting
+nnoremap == :action ReformatCode<CR>
+nnoremap <C-g> :action Generate<CR>
+
+" Comments
+nnoremap <C-l> :action CommentByLineComment<CR>
+vnoremap <C-b> :action CommentByBlockComment<CR>
+
+" Toggles
+nnoremap <C-z> :action ToggleZenMode<CR>
+nnoremap <C-1> :action ActivateVersionControlToolWindow<CR>
+nnoremap <C-2> :action ActivateRunToolWindow<CR>
+nnoremap <C-3> :action ActivateTODOToolWindow<CR>
+nnoremap <C-4> :action ActivateProblemsViewToolWindow<CR>
+nnoremap <C-t> :action ActivateTerminalToolWindow<CR>
+nnoremap <leader>n :NERDTreeToggle<CR>
+
+" Navigation
+nnoremap <c-\> :action SplitVertically<CR>
+nnoremap <c--> :action SplitHorizontally<CR>
+nnoremap <c-=> :action Unsplit<CR>
+nnoremap <c-m> :action MoveEditorToOppositeTabGroup<CR>
+
+nnoremap <TAB> :action PreviousTab<CR>
+nnoremap <s-TAB> :action NextTab<CR>
+nnoremap <C-x> :action CloseContent<CR>
+nnoremap <C-q> :action CloseActiveTab<CR>
+nnoremap <Leader>qq :action CloseAllEditors<CR>
+nnoremap <leader>jj :action QuickJavaDoc<CR>
+
+" Edit source code
+
+vnoremap < <gv
+vnoremap > >gv
+nnoremap [[ :action MethodUp<CR>
+nnoremap ]] :action MethodDown<CR>
+nnoremap <Leader>R :action Refactorings.QuickListPopupAction<CR>
+nnoremap <Leader>B :action ToggleLineBreakpoint<CR>
+" Run
+nnoremap <leader>rr :action Run<CR>
+nnoremap <leader>rc :action ChooseRunConfiguration<CR>
+nnoremap <leader>rd :action Debug<CR>
+" Git
+nnoremap <leader>gc :action ActivateCommitToolWindow<CR>
+nnoremap <leader>gp :action Vcs.Push<CR>
