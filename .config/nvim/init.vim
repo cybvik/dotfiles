@@ -14,8 +14,10 @@ call plug#end()
 
 set clipboard+=unnamedplus
 set number relativenumber
-set cc=80,120
+set termguicolors
+set colorcolumn=80
 colorscheme cyberpunk
+highlight ColorColumn guibg=black
 
 
 " Nerd tree
